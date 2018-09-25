@@ -1,0 +1,19 @@
+﻿  Source.cpp
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(14): error C2065: 'SCREEN_WIDTH': undeclared identifier
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(14): error C2065: 'SCREEN_HEIGHT': undeclared identifier
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(18): error C2065: 'SDL_PRESENTSYNC': undeclared identifier
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(18): error C2660: 'SDL_CreateRenderer': function does not take 2 arguments
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): error C2065: 'SCREEN_WIDTH': undeclared identifier
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): error C2065: 'SCREEN_HEIGHT': undeclared identifier
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): error C2440: 'initializing': cannot convert from 'initializer list' to 'SDL_Rect'
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(11): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(11): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(15): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(15): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(19): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(19): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(26): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(26): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(32): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(32): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
