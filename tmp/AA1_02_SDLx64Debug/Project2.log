@@ -1,14 +1,22 @@
-﻿  Source.cpp
-c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(12): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(12): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(16): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(16): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(20): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(20): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(27): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(27): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
-c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): warning C4297: 'SDL_main': function assumed not to throw an exception but does
-  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\source.cpp(33): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+﻿  main.cpp
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(20): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(20): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(25): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(25): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(30): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(30): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(34): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(34): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(37): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(37): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(46): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(46): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(51): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(51): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(60): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(60): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(62): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  c:\users\pjaumira\documents\github\tecnologuies-18-19\src\project2\main.cpp(62): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
   Project2.vcxproj -> C:\Users\pjaumira\Documents\GitHub\Tecnologuies-18-19\\bin\x64Debug\AA1_02_SDL.exe
   Project2.vcxproj -> C:\Users\pjaumira\Documents\GitHub\Tecnologuies-18-19\\bin\x64Debug\AA1_02_SDL.pdb (Partial PDB)
   0 File(s) copied
