@@ -9,6 +9,8 @@ d:\github\tecnologuies-18-19\src\project2\main.cpp(35): warning C4297: 'SDL_main
   d:\github\tecnologuies-18-19\src\project2\main.cpp(35): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
 d:\github\tecnologuies-18-19\src\project2\main.cpp(38): warning C4297: 'SDL_main': function assumed not to throw an exception but does
   d:\github\tecnologuies-18-19\src\project2\main.cpp(38): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+d:\github\tecnologuies-18-19\src\project2\main.cpp(41): warning C4297: 'SDL_main': function assumed not to throw an exception but does
+  d:\github\tecnologuies-18-19\src\project2\main.cpp(41): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
 d:\github\tecnologuies-18-19\src\project2\main.cpp(47): warning C4297: 'SDL_main': function assumed not to throw an exception but does
   d:\github\tecnologuies-18-19\src\project2\main.cpp(47): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
 d:\github\tecnologuies-18-19\src\project2\main.cpp(52): warning C4297: 'SDL_main': function assumed not to throw an exception but does

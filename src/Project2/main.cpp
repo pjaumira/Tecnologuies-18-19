@@ -38,12 +38,12 @@ int main(int, char*[])
 	if (TTF_Init() != 0) throw "No es pot inicialitzar les fonts";
 
 	//-->SDL_Mix
-	//if (_Init() != 0) throw "No es pot inicialitzar les fonts";
+	if (SDL_INIT_AUDIO != 0) throw "No es pot inicialitzar l'audio";
 
 	// --- SPRITES ---
 
 		//Background
-		SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg") };
+		SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg")};
 		if (bgTexture == nullptr) throw "Error: bgTexture init";
 		SDL_Rect bgRect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
@@ -65,15 +65,12 @@ int main(int, char*[])
 		if (tmpSurf == nullptr) throw "no puc fer surface 1";
 		SDL_Texture *textTexture{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf)};
 		SDL_Rect textRect{ 100,50, tmpSurf->w, tmpSurf->h };
-		// Text 2
-		SDL_Surface *tmpSurf2{ TTF_RenderText_Blended(font, "My first SDL Game", SDL_Color{ 116,25,012,255 }) };
-		SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf2) };
 		SDL_FreeSurface(tmpSurf);
-
-		bool hover = false;
 		TTF_CloseFont(font);
 
 	// --- AUDIO ---
+
+		Mix_Music *ost = Mix_LoadMUS("../../res/au/mainTheme.mp3");
 
 
 	// --- GAME LOOP ---
@@ -92,12 +89,6 @@ int main(int, char*[])
 			case SDL_MOUSEMOTION:
 				playerTarget.x = event.motion.x -50; 
 				playerTarget.y = event.motion.y -50;
-				if (playerRect.x >= textRect.x && playerRect.x <= textRect.x + textRect.w && playerRect.y >= textRect.y && playerRect.y <= textRect.y + textRect.h) {
-					hover = true;
-				}
-				else {
-					hover = false;
-				};
 				break;
 			default:;
 			}
@@ -112,13 +103,7 @@ int main(int, char*[])
 			//Background
 			SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
 			//Text
-			if (hover = true) {
-				SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
-				SDL_FreeSurface(tmpSurf2);
-			}
-			else {
-				SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect);
-			};
+			SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
 			//Player
 			SDL_RenderCopy(m_renderer,playerTexture , nullptr, &playerRect);
 			SDL_RenderPresent(m_renderer);
@@ -128,6 +113,7 @@ int main(int, char*[])
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(playerTexture);
 	SDL_DestroyTexture(textTexture);
+	Mix_FreeMusic(ost);
 	IMG_Quit();
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
