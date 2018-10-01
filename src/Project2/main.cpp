@@ -2,6 +2,7 @@
 #include <SDL.h>		// Always needs to be included for an SDL app
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 // includes normals
 #include <exception>
@@ -37,7 +38,7 @@ int main(int, char*[])
 	if (TTF_Init() != 0) throw "No es pot inicialitzar les fonts";
 
 	//-->SDL_Mix
-
+	//if (_Init() != 0) throw "No es pot inicialitzar les fonts";
 
 	// --- SPRITES ---
 
@@ -57,12 +58,19 @@ int main(int, char*[])
 
 	// --- TEXT ---
 		TTF_Font *font{ TTF_OpenFont("../../res/ttf/saiyan.ttf",80) };
+
 		if (font == nullptr) throw "no trobo la font";
+		//Text 1
 		SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font, "My first SDL Game", SDL_Color{216,255,202,255}) };
-		if (tmpSurf == nullptr) throw "no puc fer surface";
+		if (tmpSurf == nullptr) throw "no puc fer surface 1";
 		SDL_Texture *textTexture{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf)};
 		SDL_Rect textRect{ 100,50, tmpSurf->w, tmpSurf->h };
+		// Text 2
+		SDL_Surface *tmpSurf2{ TTF_RenderText_Blended(font, "My first SDL Game", SDL_Color{ 116,25,012,255 }) };
+		SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf2) };
 		SDL_FreeSurface(tmpSurf);
+
+		bool hover = false;
 		TTF_CloseFont(font);
 
 	// --- AUDIO ---
@@ -84,6 +92,12 @@ int main(int, char*[])
 			case SDL_MOUSEMOTION:
 				playerTarget.x = event.motion.x -50; 
 				playerTarget.y = event.motion.y -50;
+				if (playerRect.x >= textRect.x && playerRect.x <= textRect.x + textRect.w && playerRect.y >= textRect.y && playerRect.y <= textRect.y + textRect.h) {
+					hover = true;
+				}
+				else {
+					hover = false;
+				};
 				break;
 			default:;
 			}
@@ -97,11 +111,17 @@ int main(int, char*[])
 		SDL_RenderClear(m_renderer);
 			//Background
 			SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
+			//Text
+			if (hover = true) {
+				SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
+				SDL_FreeSurface(tmpSurf2);
+			}
+			else {
+				SDL_RenderCopy(m_renderer, textTexture2, nullptr, &textRect);
+			};
 			//Player
 			SDL_RenderCopy(m_renderer,playerTexture , nullptr, &playerRect);
-			//Text
-			SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
-		SDL_RenderPresent(m_renderer);
+			SDL_RenderPresent(m_renderer);
 	}
 
 	// --- DESTROY ---
