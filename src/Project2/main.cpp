@@ -8,10 +8,13 @@
 #include <exception>
 #include <iostream>
 #include <string>
+#include <time.h>
 
 //Game general information
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
+#define FPS 60
+#define DELAY_TIME 1000.0f / FPS
 
 // Main
 int main(int, char*[]) 
@@ -38,7 +41,9 @@ int main(int, char*[])
 	if (TTF_Init() != 0) throw "No es pot inicialitzar les fonts";
 
 	//-->SDL_Mix
-	if (SDL_INIT_AUDIO != 0) throw "No es pot inicialitzar l'audio";
+	const Uint8 mixFlags{ MIX_INIT_MP3 | MIX_INIT_OGG };
+	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
+	if (SDL_INIT_AUDIO < 0) throw "No es pot inicilaitzar l audio";
 
 	// --- SPRITES ---
 
@@ -48,35 +53,70 @@ int main(int, char*[])
 		SDL_Rect bgRect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
 		//Player Cursor
-		SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer,"../../res/img/kintoun.png")};
-		if (playerTexture == nullptr) throw "Error: PlayerTexture init";
-		SDL_Rect playerRect{ 0,0, 350, 189 };
-		SDL_Rect playerTarget{ 0,0,100,100 };
+		SDL_Texture *mouseTexture{ IMG_LoadTexture(m_renderer,"../../res/img/kintoun.png") };
+		if (mouseTexture == nullptr) throw "Error: PlayerTexture init";
+		SDL_Rect mouseRect{ 0,0, 90, 60 };
+		SDL_Rect mouseTarget{ 0,0,80,80 };
 
 	//-->Animated Sprite ---
-
+		SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer, "../../res/img/sdp01.png") };
+		SDL_Rect playerRect, playerPosition;
+		int textwidth, textheight, framewidth, frameheight;
+		SDL_QueryTexture(playerTexture, NULL, NULL, &textwidth, &textheight);
+		framewidth = textwidth / 6;
+		frameheight = textheight / 1;
+		playerPosition.x = playerPosition.y = 0;
+		playerRect.x = playerRect.y = 0;
+		playerPosition.h = playerRect.h = frameheight;
+		playerPosition.w = playerRect.w = frameheight;
+		int frametime = 0;
 
 	// --- TEXT ---
 		TTF_Font *font{ TTF_OpenFont("../../res/ttf/saiyan.ttf",80) };
-
 		if (font == nullptr) throw "no trobo la font";
-		//Text 1
-		SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font, "My first SDL Game", SDL_Color{216,255,202,255}) };
-		if (tmpSurf == nullptr) throw "no puc fer surface 1";
-		SDL_Texture *textTexture{ SDL_CreateTextureFromSurface(m_renderer, tmpSurf)};
-		SDL_Rect textRect{ 100,50, tmpSurf->w, tmpSurf->h };
-		SDL_FreeSurface(tmpSurf);
+
+		//Play
+		SDL_Surface *tmpSurfP{ TTF_RenderText_Blended(font, "Play", SDL_Color{ 50,100,200,255 }) };
+		if (tmpSurfP == nullptr) throw "no puc fer surface P";
+		SDL_Texture *textTextureP{ SDL_CreateTextureFromSurface(m_renderer, tmpSurfP) };
+		SDL_Rect textRectP{ 340,75, tmpSurfP->w, tmpSurfP->h };
+		SDL_FreeSurface(tmpSurfP);
+
+		//Sound
+		SDL_Surface *tmpSurfS{ TTF_RenderText_Blended(font, "Sound ON", SDL_Color{116,25,20,255}) };
+		if (tmpSurfS == nullptr) throw "no puc fer surface S";
+		SDL_Texture *textTextureS{ SDL_CreateTextureFromSurface(m_renderer, tmpSurfS) };
+		SDL_Rect textRectS{ 280,200, tmpSurfS->w, tmpSurfS->h };
+		SDL_FreeSurface(tmpSurfS);
+
+		//Quit
+		SDL_Surface *tmpSurfQ{ TTF_RenderText_Blended(font, "Quit", SDL_Color{ 200,100,100,255 }) };
+		if (tmpSurfQ == nullptr) throw "no puc fer surface Q";
+		SDL_Texture *textTextureQ{ SDL_CreateTextureFromSurface(m_renderer, tmpSurfQ) };
+		SDL_Rect textRectQ{ 330,325, tmpSurfQ->w, tmpSurfQ->h };
+		SDL_FreeSurface(tmpSurfQ);
+
+		//Fin
 		TTF_CloseFont(font);
 
 	// --- AUDIO ---
-
 		Mix_Music *ost = Mix_LoadMUS("../../res/au/mainTheme.mp3");
+		if (!ost) throw "error finding the music";
+		Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+		Mix_PlayMusic(ost, -1);
 
+	// Time
+		clock_t lastTime = clock();
+		float timeDown = 10.;
+		float deltaTime = 0;
+		Uint32 frameStart, frameTime;
 
 	// --- GAME LOOP ---
 	SDL_Event event;
+	frameStart = SDL_GetTicks();
 	bool isRunning = true;
 	while (isRunning) {
+
 		// HANDLE EVENTS
 		while (SDL_PollEvent(&event)) { // per poder cargar totes els ordres rebudes del stack
 			switch (event.type) {
@@ -84,36 +124,59 @@ int main(int, char*[])
 				isRunning = false; 
 				break;
 			case SDL_KEYDOWN:	
-				if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false; 
+				if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false;
 				break;
 			case SDL_MOUSEMOTION:
-				playerTarget.x = event.motion.x -50; 
-				playerTarget.y = event.motion.y -50;
+				mouseTarget.x = event.motion.x -30; 
+				mouseTarget.y = event.motion.y -30;
+				break;
+			case SDL_MOUSEBUTTONDOWN:
 				break;
 			default:;
 			}
 		}
 
 		// UPDATE
-		playerRect.x += (playerTarget.x - playerRect.x) / 10;
-		playerRect.y += (playerTarget.y - playerRect.y) / 10;
+		mouseRect.x += (mouseTarget.x - mouseRect.x) / 10;
+		mouseRect.y += (mouseTarget.y - mouseRect.y) / 10;
+		frametime++;
+		if (FPS / frametime <= 9) {
+			frametime = 0;
+			playerRect.x += framewidth;
+			if (playerRect.x >= textwidth)
+				playerRect.x = 0;
+		}
+		deltaTime = (clock() - lastTime);
+		lastTime = clock();
+		deltaTime /= CLOCKS_PER_SEC;
+		timeDown -= deltaTime;
+		std::cout << timeDown << std::endl;
+		frameTime = SDL_GetTicks() - frameStart;
+		if (frameTime < DELAY_TIME) {
+			SDL_Delay((int)(DELAY_TIME - frameTime));
+		}
 
 		// DRAW
 		SDL_RenderClear(m_renderer);
-			//Background
-			SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
-			//Text
-			SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
-			//Player
-			SDL_RenderCopy(m_renderer,playerTexture , nullptr, &playerRect);
-			SDL_RenderPresent(m_renderer);
+		//Background
+		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
+		//Text
+		SDL_RenderCopy(m_renderer, textTextureP, nullptr, &textRectP);
+		SDL_RenderCopy(m_renderer, textTextureS, nullptr, &textRectS);
+		SDL_RenderCopy(m_renderer, textTextureQ, nullptr, &textRectQ);
+		//Player
+		SDL_RenderCopy(m_renderer,mouseTexture , nullptr, &mouseRect);
+		SDL_RenderPresent(m_renderer);
+		SDL_RenderCopy(m_renderer, playerTexture, &playerRect, &playerPosition);
 	}
 
 	// --- DESTROY ---
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(playerTexture);
-	SDL_DestroyTexture(textTexture);
-	Mix_FreeMusic(ost);
+	SDL_DestroyTexture(textTextureP);
+	SDL_DestroyTexture(textTextureQ);
+	SDL_DestroyTexture(textTextureS);
+	Mix_CloseAudio();
 	IMG_Quit();
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
@@ -121,6 +184,7 @@ int main(int, char*[])
 	// --- QUIT ---
 	SDL_Quit();
 	TTF_Quit();
+	Mix_Quit();
 
 	return 0;
 }
