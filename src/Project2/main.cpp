@@ -173,8 +173,8 @@ int main(int, char*[])
 			int y;
 		};
 
-		int Scene = 1;
 		bool sound = true;
+		int Scene = 1;
 
 		vect2 mouseCoord;
 		mouseCoord.x = 0;
@@ -242,7 +242,6 @@ int main(int, char*[])
 		};
 
 		//Si es la escena del menu
-		if (Scene == 1) {
 			//hover events
 			if (mouseTarget.x >= textRectP.x && mouseTarget.x <= textRectP.x + textRectP.w && mouseTarget.y >= textRectP.y && mouseTarget.y <= textRectP.y + textRectP.h) {
 				textTextureP = textTexturePH;
@@ -251,7 +250,7 @@ int main(int, char*[])
 			else {
 				textTextureP = textTexturePNH;
 				SDL_FreeSurface(tmpSurfP);
-			}
+			};
 
 			if (mouseTarget.x >= textRectQ.x && mouseTarget.x <= textRectQ.x + textRectQ.w && mouseTarget.y >= textRectQ.y && mouseTarget.y <= textRectQ.y + textRectQ.h) {
 				textTextureQ = textTextureQH;
@@ -264,24 +263,21 @@ int main(int, char*[])
 
 			//eventos de apretar
 			if (mouseCoord.x >= textRectS.x && mouseCoord.x <= textRectS.x + textRectS.w && mouseCoord.y >= textRectS.y && mouseCoord.y <= textRectS.y + textRectS.h) {
-				if (sound) {
+				if (Mix_PlayingMusic) {
+					Mix_PauseMusic();
 					textTextureS = textTextureSF;
 					SDL_FreeSurface(tmpSurfS);
-						Mix_HaltMusic();
-						sound = false;
-				}
-				if (sound = false) {
+				};
+				if (!Mix_PlayingMusic) {
+					Mix_ResumeMusic;
 					textTextureS = textTextureSN;
 					SDL_FreeSurface(tmpSurfS);
-					Mix_PlayMusic(ost, -1);
-					sound = true;
-				}
+				};
 			};
 
 			if (mouseCoord.x >= textRectQ.x && mouseCoord.x <= textRectQ.x + textRectQ.w && mouseCoord.y >= textRectQ.y && mouseCoord.y <= textRectQ.y + textRectQ.h) {
 				isRunning = false;
-			}
-		};
+			};
 
 		if (mouseCoord.x >= textRectP.x && mouseCoord.x <= textRectP.x + textRectP.w && mouseCoord.y >= textRectP.y && mouseCoord.y <= textRectP.y + textRectP.h) {
 			Scene = 2;
@@ -290,6 +286,15 @@ int main(int, char*[])
 		//Si es la escena de joc
 		if (Scene == 2) {
 			bgTexture = bgTextureC;
+			textTextureP = nullptr;
+			textTexturePH = nullptr;
+			textTexturePNH = nullptr;
+			textTextureS = nullptr;
+			textTextureQ = nullptr;
+			textTextureQH = nullptr;
+			textTextureQNH = nullptr;
+			mouseTexture = nullptr;
+
 
 		};
 

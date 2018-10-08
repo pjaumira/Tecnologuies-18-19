@@ -1,5 +1,8 @@
 ﻿  main.cpp
 d:\github\tecnologuies-18-19\src\project2\main.cpp(234): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+d:\github\tecnologuies-18-19\src\project2\main.cpp(266): warning C4551: function call missing argument list
+d:\github\tecnologuies-18-19\src\project2\main.cpp(271): warning C4551: function call missing argument list
+d:\github\tecnologuies-18-19\src\project2\main.cpp(272): warning C4551: function call missing argument list
 d:\github\tecnologuies-18-19\src\project2\main.cpp(24): warning C4297: 'SDL_main': function assumed not to throw an exception but does
   d:\github\tecnologuies-18-19\src\project2\main.cpp(24): note: __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
 d:\github\tecnologuies-18-19\src\project2\main.cpp(29): warning C4297: 'SDL_main': function assumed not to throw an exception but does
